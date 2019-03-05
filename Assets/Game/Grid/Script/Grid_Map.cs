@@ -6,7 +6,7 @@ public class Grid_Map : MonoBehaviour
 {
     private int[,] grid;
 
-    public GameObject greenBlock_two_v;
+    public GameObject greenBlock_two,greenBlock_three;
 
     public Sprite[] marks;
 
@@ -44,21 +44,31 @@ public class Grid_Map : MonoBehaviour
 
     public void detector(params int[] value) // [0] 0: 橫的 1: 直的 帶入的是 方塊本身的值
     {
-        if (value.Length == 2)
+        for (int i = 0; i < 6; i++)
         {
-            for (int i = 0; i < 6; i++)
-            {
-                for (int j = 0; j < 7; j++)
-                {
-                    int grid_value = grid[i, j];
+            for (int j = 0; j < 7; j++)
+            { 
+                int grid_value = grid[i, j];
 
-                    if (grid_value == value[0])
+                if (grid_value == value[0])
+                {
+                    if (i != 5)
                     {
-                        if (i != 5)
+                        if (grid[i + 1, j] == value[1])
                         {
-                            if (grid[i + 1, j] == value[1])
+                            if (value.Length == 2)
                             {
-                                detector_ground(0,2,i,j);
+                                detector_ground(0, 2, i, j);
+                            }
+                            else
+                            {
+                                if (i != 4)
+                                {
+                                    if (grid[i + 2, j] == value[2])
+                                    {
+                                        detector_ground(0, 3, i, j);
+                                    }
+                                }
                             }
                         }
                     }
@@ -67,7 +77,7 @@ public class Grid_Map : MonoBehaviour
         }
     }
 
-    void detector_ground(params int[] value) //第一格 0:橫 1:直 第二格 0:兩格 1: 三格
+    void detector_ground(params int[] value) //第一格 0:橫 1:直 第二格 2:兩格 3: 三格
     {
         int x = value[2];
         int y = value[3];
@@ -80,13 +90,13 @@ public class Grid_Map : MonoBehaviour
                 {
                     if (grid[x + i, y + 1] == 3)
                     {
-                        createGreenBlock_v(x, x + 1, y);
+                        createGreenBlock_v(x, value[1], y);
                         break;
                     }
                 }
                 else
                 {
-                    createGreenBlock_v(x, x + 1, y);
+                    createGreenBlock_v(x, value[1], y);
                     break;
                 }
             }
@@ -96,16 +106,22 @@ public class Grid_Map : MonoBehaviour
         }
     }
 
-    void createGreenBlock_v(int x1, int x2, int y)
+    void createGreenBlock_v(int x1, int length, int y)
     {
-        GameObject greenblock_buffer = Instantiate(greenBlock_two_v);
+        GameObject greenblock_buffer;
+
+        if (length == 2)
+            greenblock_buffer = Instantiate(greenBlock_two);
+        else
+            greenblock_buffer = Instantiate(greenBlock_three);
 
         float x = grid_lines[y].grid_sprite[x1].transform.position.x +
-                  grid_lines[y].grid_sprite[x2].transform.position.x;
+                  grid_lines[y].grid_sprite[x1 + length - 1].transform.position.x;
 
-        greenblock_buffer.GetComponent<GreenBlock>().key(x1, y, x2, y);
-        greenblock_buffer.transform.position = new Vector2(x / 2, grid_lines[y].grid_sprite[x2].transform.position.y);
+        greenblock_buffer.GetComponent<GreenBlock>().key(0, length, x1, y);
+        greenblock_buffer.transform.position = new Vector2(x / 2, grid_lines[y].grid_sprite[x1 + length-1].transform.position.y);
     }
+    
 
 
     public void setExistsBlock(params int[] value)

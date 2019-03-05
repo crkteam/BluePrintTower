@@ -1379,6 +1379,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f638566e2e9a014486a945f94f5f2f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mark1: 0
+  mark2: 0
+  mark3: 0
 --- !u!61 &371192948
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1812,6 +1815,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1827,6 +1831,18 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87646bb6ee903fd40903cffe74044a4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -4786,7 +4802,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bfd234e1c10ba94eaa1e36bc3ad3bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greenBlock_two_v: {fileID: 2594633726388226502, guid: 889fce40b59ce7b4c8f1889129b0c606,
+  greenBlock_two: {fileID: 2594633726388226502, guid: 889fce40b59ce7b4c8f1889129b0c606,
+    type: 3}
+  greenBlock_three: {fileID: 732094828864457065, guid: 8252ecd8a72e86749b9013007aebf8a7,
     type: 3}
   marks:
   - {fileID: 21300000, guid: 39e0da38f44bbaf4693ef81561411505, type: 3}
@@ -5681,6 +5699,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f638566e2e9a014486a945f94f5f2f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mark1: 0
+  mark2: 0
+  mark3: 0
 --- !u!61 &1615579426
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7899,6 +7920,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f638566e2e9a014486a945f94f5f2f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mark1: 0
+  mark2: 0
+  mark3: 0
 --- !u!50 &536903691440706220
 Rigidbody2D:
   serializedVersion: 4

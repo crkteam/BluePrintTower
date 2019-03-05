@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Drag : MonoBehaviour
 {
+    [SerializeField]
     private int mark1, mark2, mark3;
 
     private Vector3 screenPoint;
@@ -17,7 +18,7 @@ public class Drag : MonoBehaviour
 
     private void Start()
     {
-        init(0, 1, 9);
+        init(0, 1, 999);
     }
 
     void init(int mark1, int mark2, int mark3)
@@ -34,7 +35,15 @@ public class Drag : MonoBehaviour
             transform.Rotate(0, 0, 90);
         }
 
-        GameObject.Find("Grid_Map").GetComponent<Grid_Map>().detector(mark1, mark2);
+        if (mark3 == 999)
+        {
+            GameObject.Find("Grid_Map").GetComponent<Grid_Map>().detector(mark1, mark2);
+        }
+        else
+        {
+            GameObject.Find("Grid_Map").GetComponent<Grid_Map>().detector(mark1, mark2,mark3);
+        }
+
 
         prev = transform.position;
         transform.position += new Vector3(Random.Range(-0.05f, 0.05f), 0.05f); // 典籍會有抬起來的效果
@@ -64,11 +73,11 @@ public class Drag : MonoBehaviour
             transform.position = prev;
         }
 
-        GameObject[] green = GameObject.FindGameObjectsWithTag("GreenBlock");
-        foreach (var value in green)
-        {
-            Destroy(value);
-        }
+//        GameObject[] green = GameObject.FindGameObjectsWithTag("GreenBlock");
+//        foreach (var value in green)
+//        {
+//            Destroy(value);
+//        }
     }
 
     private void OnTriggerStay2D(Collider2D other)
