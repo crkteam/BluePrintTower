@@ -6,7 +6,7 @@ public class Grid_Map : MonoBehaviour
 {
     private int[,] grid;
 
-    public GameObject greenBlock_two,greenBlock_three;
+    public GameObject greenBlock_two, greenBlock_three;
 
     public Sprite[] marks;
 
@@ -47,31 +47,37 @@ public class Grid_Map : MonoBehaviour
         for (int i = 0; i < 6; i++)
         {
             for (int j = 0; j < 7; j++)
-            { 
+            {
                 int grid_value = grid[i, j];
-
-                if (grid_value == value[0])
+                int type = value[0];
+                
+                
+                if (type == 0)
                 {
-                    if (i != 5)
+                    if (grid_value == value[1])
                     {
-                        if (grid[i + 1, j] == value[1])
+                        if (i != 5)
                         {
-                            if (value.Length == 2)
+                            if (grid[i + 1, j] == value[2])
                             {
-                                detector_ground(0, 2, i, j);
-                            }
-                            else
-                            {
-                                if (i != 4)
+                                if (value.Length == 3)
                                 {
-                                    if (grid[i + 2, j] == value[2])
+                                    detector_ground(0, 2, i, j);
+                                }
+                                else
+                                {
+                                    if (i != 4)
                                     {
-                                        detector_ground(0, 3, i, j);
+                                        if (grid[i + 2, j] == value[3])
+                                        {
+                                            detector_ground(0, 3, i, j);
+                                        }
                                     }
                                 }
                             }
                         }
                     }
+                    
                 }
             }
         }
@@ -119,10 +125,12 @@ public class Grid_Map : MonoBehaviour
                   grid_lines[y].grid_sprite[x1 + length - 1].transform.position.x;
 
         greenblock_buffer.GetComponent<GreenBlock>().key(0, length, x1, y);
-        greenblock_buffer.transform.position = new Vector2(x / 2, grid_lines[y].grid_sprite[x1 + length-1].transform.position.y);
+        greenblock_buffer.transform.position =
+            new Vector2(x / 2, grid_lines[y].grid_sprite[x1 + length - 1].transform.position.y);
     }
+-0
     
-
+     
 
     public void setExistsBlock(params int[] value)
     {

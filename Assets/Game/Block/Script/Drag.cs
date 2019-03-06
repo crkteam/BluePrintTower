@@ -7,6 +7,8 @@ public class Drag : MonoBehaviour
     [SerializeField]
     private int mark1, mark2, mark3;
 
+    private int type;
+    
     private Vector3 screenPoint;
     private Vector3 offset;
 
@@ -18,6 +20,7 @@ public class Drag : MonoBehaviour
 
     private void Start()
     {
+        type = 0;
         init(0, 1, 999);
     }
 
@@ -37,11 +40,11 @@ public class Drag : MonoBehaviour
 
         if (mark3 == 999)
         {
-            GameObject.Find("Grid_Map").GetComponent<Grid_Map>().detector(mark1, mark2);
+            GameObject.Find("Grid_Map").GetComponent<Grid_Map>().detector(type,mark1, mark2);
         }
         else
         {
-            GameObject.Find("Grid_Map").GetComponent<Grid_Map>().detector(mark1, mark2,mark3);
+            GameObject.Find("Grid_Map").GetComponent<Grid_Map>().detector(type,mark1, mark2,mark3);
         }
 
 
@@ -50,6 +53,23 @@ public class Drag : MonoBehaviour
         offset = gameObject.transform.position -
                  Camera.main.ScreenToWorldPoint(
                      new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+    }
+
+    private void OnMouseEnter()
+    {
+        if (Input.GetMouseButtonDown(1)) // 轉向
+        {
+            if (type == 0)
+            {
+                gameObject.transform.Rotate(0,0,-90);
+                type = 1;
+            }
+            else
+            {
+                gameObject.transform.Rotate(0,0,90);
+                type = 0;
+            }
+        }
     }
 
     void OnMouseDrag()
@@ -73,11 +93,11 @@ public class Drag : MonoBehaviour
             transform.position = prev;
         }
 
-//        GameObject[] green = GameObject.FindGameObjectsWithTag("GreenBlock");
-//        foreach (var value in green)
-//        {
-//            Destroy(value);
-//        }
+        GameObject[] green = GameObject.FindGameObjectsWithTag("GreenBlock");
+        foreach (var value in green)
+        {
+            Destroy(value);
+        }
     }
 
     private void OnTriggerStay2D(Collider2D other)
