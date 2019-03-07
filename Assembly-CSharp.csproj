@@ -62,6 +62,7 @@
     <Compile Include="Assets\Game\Grid\Script\Grid_Creator.cs" />
     <Compile Include="Assets\Game\Grid\Script\Grid_Line.cs" />
     <Compile Include="Assets\Game\Grid\Script\Grid_Map.cs" />
+    <Compile Include="Assets\Game\Script\BlockCreator.cs" />
     <Compile Include="Assets\Game\Script\GameController.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/CrkJK/Desktop/Git/BluePrintTower/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

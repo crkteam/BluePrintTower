@@ -50,8 +50,8 @@ public class Grid_Map : MonoBehaviour
             {
                 int grid_value = grid[i, j];
                 int type = value[0];
-                
-                
+
+
                 if (type == 0)
                 {
                     if (grid_value == value[1])
@@ -77,7 +77,32 @@ public class Grid_Map : MonoBehaviour
                             }
                         }
                     }
-                    
+                }
+                else
+                {
+                    if (grid_value == value[1])
+                    {
+                        if (j != 6)
+                        {
+                            if (grid[i, j + 1] == value[2])
+                            {
+                                if (value.Length == 3)
+                                {
+                                    detector_ground(1, 2, i, j);
+                                }
+                                else
+                                {
+                                    if (j != 5)
+                                    {
+                                        if (grid[i, j + 2] == value[3])
+                                        {
+                                            detector_ground(1, 3, i, j);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -109,6 +134,34 @@ public class Grid_Map : MonoBehaviour
         }
         else // 直的
         {
+            if (value[1] == 2)
+            {
+                if (y == 5)
+                {
+                    createGreenBlock_h(y, value[1], x);
+                }
+                else
+                {
+                    if (grid[x, y + value[1]] == 3)
+                    {
+                        createGreenBlock_h(y, value[1], x);
+                    }
+                }
+            }
+            else
+            {
+                if (y == 4)
+                {
+                    createGreenBlock_h(y, value[1], x);
+                }
+                else
+                {
+                    if (grid[x, y + value[1]] == 3)
+                    {
+                        createGreenBlock_h(y, value[1], x);
+                    }
+                }
+            }
         }
     }
 
@@ -126,11 +179,27 @@ public class Grid_Map : MonoBehaviour
 
         greenblock_buffer.GetComponent<GreenBlock>().key(0, length, x1, y);
         greenblock_buffer.transform.position =
-            new Vector2(x / 2, grid_lines[y].grid_sprite[x1 + length - 1].transform.position.y);
+            new Vector2(x / 2, grid_lines[y].grid_sprite[x1].transform.position.y);
     }
--0
-    
-     
+
+    void createGreenBlock_h(int y1, int length, int x)
+    {
+        GameObject greenblock_buffer;
+
+        if (length == 2)
+            greenblock_buffer = Instantiate(greenBlock_two);
+        else
+            greenblock_buffer = Instantiate(greenBlock_three);
+        
+        greenblock_buffer.transform.Rotate(0,0,90);
+        float y = grid_lines[y1].grid_sprite[x].transform.position.y +
+                  grid_lines[y1 + length - 1].grid_sprite[x].transform.position.y;
+
+        greenblock_buffer.GetComponent<GreenBlock>().key(1, length, x, y1); //
+        greenblock_buffer.transform.position =
+            new Vector2(grid_lines[y1].grid_sprite[x].transform.position.x, y / 2);
+    }
+
 
     public void setExistsBlock(params int[] value)
     {

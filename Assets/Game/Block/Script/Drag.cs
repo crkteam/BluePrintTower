@@ -55,10 +55,11 @@ public class Drag : MonoBehaviour
                      new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
     }
 
-    private void OnMouseEnter()
+    private void OnMouseOver()
     {
         if (Input.GetMouseButtonDown(1)) // 轉向
         {
+            
             if (type == 0)
             {
                 gameObject.transform.Rotate(0,0,-90);
@@ -71,6 +72,7 @@ public class Drag : MonoBehaviour
             }
         }
     }
+
 
     void OnMouseDrag()
     {
