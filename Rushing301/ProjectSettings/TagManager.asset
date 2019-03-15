@@ -39,6 +39,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BackGround_Bullet
+    uniqueID: 790715251
+    locked: 0
   - name: BackGround
     uniqueID: 3802682783
     locked: 0

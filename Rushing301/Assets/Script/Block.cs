@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    [SerializeField]
-    private GameController _gameController;
-    
-    [SerializeField]
-    private int order;
+    [SerializeField] private GameController _gameController;
+
+    [SerializeField] private int order;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
